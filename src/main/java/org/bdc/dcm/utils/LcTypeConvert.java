@@ -16,7 +16,7 @@ public class LcTypeConvert extends CommTypeConvert{
 	
 	private final static int DATATYPE_TEMPERATURE = 10;
 	private final static int DATATYPE_JDQSTATE = 11;
-	private final static int JDQ_Control = 12;
+	private final static int DATATYPE_JDQ_Control = 12;
 	private final static int DATATYPE_TEMPERATURE_WARM = 13;
 	private final static int DATATYPE_SURPLUS_POWER= 14;
 	private final static int DATATYPE_SURPLUS_TIME= 15;
@@ -50,7 +50,7 @@ public class LcTypeConvert extends CommTypeConvert{
 	public int convertTypeStr2TypeId(String type) {
 	
 		if ("JDQ_control".equals(type)) {
-			return JDQ_Control;
+			return DATATYPE_JDQ_Control;
 		}
 		if("temperature_warm".equals(type)){
 			return DATATYPE_TEMPERATURE_WARM;
@@ -95,7 +95,7 @@ public class LcTypeConvert extends CommTypeConvert{
 				bs[7] = crc[0];
 				return bs;
 			//断电解锁	
-			case JDQ_Control:
+			case DATATYPE_JDQ_Control:
 				byte[] ctrCmd = (byte[]) val;
 				bs = new byte[11];
 				tmp = new byte[9];
