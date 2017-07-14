@@ -6,6 +6,7 @@ import org.bdc.dcm.modbus.handler.ModbusTcpHandler;
 import org.bdc.dcm.modbus.handler.ServiceRequestHandler;
 import org.bdc.dcm.modbus.requests.ReadFullReadHoldingRegistersRequest;
 import org.bdc.dcm.netty.NettyBoot;
+import org.bdc.dcm.vo.DataPack;
 
 import com.digitalpetri.modbus.responses.ModbusResponse;
 import com.digitalpetri.modbus.responses.ReadHoldingRegistersResponse;
@@ -21,7 +22,7 @@ class LqRequestHandler implements ServiceRequestHandler{
 
 	@Override
 	public void onReadHoldingRegisters(
-			ServiceRequest<ReadFullReadHoldingRegistersRequest> service) {
+			ServiceRequest<ReadFullReadHoldingRegistersRequest> service,DataPack dataPack) {
 		ReadFullReadHoldingRegistersRequest  request = service.getRequest();
 		Map<String,Object> quantities = request.getQuantity();
 		//TODO  具体业务

@@ -40,39 +40,39 @@ public class ModbusTcpHandler extends DataHandler{
 
 	        switch (pdu.getFunctionCode()) {
 	            case ReadCoils:
-	                handler.onReadCoils(ModbusTcpServiceRequest.of(pdu, ctx.channel()));
+	                handler.onReadCoils(ModbusTcpServiceRequest.of(pdu, ctx.channel()),dataPack);
 	                break;
 
 	            case ReadDiscreteInputs:
-	                handler.onReadDiscreteInputs(ModbusTcpServiceRequest.of(pdu, ctx.channel()));
+	                handler.onReadDiscreteInputs(ModbusTcpServiceRequest.of(pdu, ctx.channel()),dataPack);
 	                break;
 
 	            case ReadHoldingRegisters:
-	                handler.onReadHoldingRegisters(ModbusTcpServiceRequest.of(pdu, ctx.channel()));
+	                handler.onReadHoldingRegisters(ModbusTcpServiceRequest.of(pdu, ctx.channel()),dataPack);
 	                break;
 
 	            case ReadInputRegisters:
-	                handler.onReadInputRegisters(ModbusTcpServiceRequest.of(pdu, ctx.channel()));
+	                handler.onReadInputRegisters(ModbusTcpServiceRequest.of(pdu, ctx.channel()),dataPack);
 	                break;
 
 	            case WriteSingleCoil:
-	                handler.onWriteSingleCoil(ModbusTcpServiceRequest.of(pdu, ctx.channel()));
+	                handler.onWriteSingleCoil(ModbusTcpServiceRequest.of(pdu, ctx.channel()),dataPack);
 	                break;
 
 	            case WriteSingleRegister:
-	                handler.onWriteSingleRegister(ModbusTcpServiceRequest.of(pdu, ctx.channel()));
+	                handler.onWriteSingleRegister(ModbusTcpServiceRequest.of(pdu, ctx.channel()),dataPack);
 	                break;
 
 	            case WriteMultipleCoils:
-	                handler.onWriteMultipleCoils(ModbusTcpServiceRequest.of(pdu, ctx.channel()));
+	                handler.onWriteMultipleCoils(ModbusTcpServiceRequest.of(pdu, ctx.channel()),dataPack);
 	                break;
 
 	            case WriteMultipleRegisters:
-	                handler.onWriteMultipleRegisters(ModbusTcpServiceRequest.of(pdu, ctx.channel()));
+	                handler.onWriteMultipleRegisters(ModbusTcpServiceRequest.of(pdu, ctx.channel()),dataPack);
 	                break;
 
 	            case MaskWriteRegister:
-	                handler.onMaskWriteRegister(ModbusTcpServiceRequest.of(pdu, ctx.channel()));
+	                handler.onMaskWriteRegister(ModbusTcpServiceRequest.of(pdu, ctx.channel()),dataPack);
 	                break;
 
 	            default:

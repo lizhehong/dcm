@@ -1,6 +1,7 @@
 package org.bdc.dcm.modbus.handler;
 
 import org.bdc.dcm.modbus.requests.ReadFullReadHoldingRegistersRequest;
+import org.bdc.dcm.vo.DataPack;
 
 import com.digitalpetri.modbus.requests.MaskWriteRegisterRequest;
 import com.digitalpetri.modbus.requests.ModbusRequest;
@@ -18,49 +19,49 @@ import io.netty.util.ReferenceCountUtil;
 public interface ServiceRequestHandler {
 
 	default void onReadHoldingRegisters(
-			ServiceRequest<ReadFullReadHoldingRegistersRequest> service) {
+			ServiceRequest<ReadFullReadHoldingRegistersRequest> service,DataPack dataPack) {
 
 		ReferenceCountUtil.release(service.getRequest());
 	}
 
-	default void onReadInputRegisters(ServiceRequest<ReadInputRegistersRequest> service) {
+	default void onReadInputRegisters(ServiceRequest<ReadInputRegistersRequest> service,DataPack dataPack) {
 
 		ReferenceCountUtil.release(service.getRequest());
 	}
 
-	default void onReadCoils(ServiceRequest<ReadCoilsRequest> service) {
+	default void onReadCoils(ServiceRequest<ReadCoilsRequest> service,DataPack dataPack) {
 
 		ReferenceCountUtil.release(service.getRequest());
 	}
 
-	default void onReadDiscreteInputs(ServiceRequest<ReadDiscreteInputsRequest> service) {
+	default void onReadDiscreteInputs(ServiceRequest<ReadDiscreteInputsRequest> service,DataPack dataPack) {
 
 		ReferenceCountUtil.release(service.getRequest());
 	}
 
-	default void onWriteSingleCoil(ServiceRequest<WriteSingleCoilRequest> service) {
+	default void onWriteSingleCoil(ServiceRequest<WriteSingleCoilRequest> service,DataPack dataPack) {
 
 		ReferenceCountUtil.release(service.getRequest());
 	}
 
 	default void onWriteSingleRegister(
-			ServiceRequest<WriteSingleRegisterRequest> service) {
+			ServiceRequest<WriteSingleRegisterRequest> service,DataPack dataPack) {
 
 		ReferenceCountUtil.release(service.getRequest());
 	}
 
-	default void onWriteMultipleCoils(ServiceRequest<WriteMultipleCoilsRequest> service) {
+	default void onWriteMultipleCoils(ServiceRequest<WriteMultipleCoilsRequest> service,DataPack dataPack) {
 
 		ReferenceCountUtil.release(service.getRequest());
 	}
 
 	default void onWriteMultipleRegisters(
-			ServiceRequest<WriteMultipleRegistersRequest> service) {
+			ServiceRequest<WriteMultipleRegistersRequest> service,DataPack dataPack) {
 
 		ReferenceCountUtil.release(service.getRequest());
 	}
 
-	default void onMaskWriteRegister(ServiceRequest<MaskWriteRegisterRequest> service) {
+	default void onMaskWriteRegister(ServiceRequest<MaskWriteRegisterRequest> service,DataPack dataPack) {
 
 		ReferenceCountUtil.release(service.getRequest());
 	}
@@ -77,7 +78,7 @@ public interface ServiceRequestHandler {
          *
          * @param response the service response
          */
-        void sendResponse(ModbusResponse response);
+        void sendResponse(ModbusResponse response,byte addr);
 
 
 	}

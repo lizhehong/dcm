@@ -1,11 +1,15 @@
 package org.bdc.dcm.modbus.requests;
 
+import org.bdc.dcm.modbus.encoder.ModbusPduEncoder;
+import org.bdc.dcm.modbus.encoder.ModbusResponseEncoder;
 import org.bdc.dcm.modbus.handler.ServiceRequestHandler;
+import org.bdc.dcm.vo.DataPack;
 
 import com.digitalpetri.modbus.ModbusPdu;
 import com.digitalpetri.modbus.requests.ModbusRequest;
 import com.digitalpetri.modbus.responses.ModbusResponse;
 
+import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 
 public class ModbusTcpServiceRequest<Request extends ModbusRequest>
@@ -13,7 +17,8 @@ public class ModbusTcpServiceRequest<Request extends ModbusRequest>
 
 	private final Request request;
 	private final Channel channel;
-
+	private final ModbusPduEncoder encoder = new ModbusResponseEncoder();
+	
 	private ModbusTcpServiceRequest(Request request, Channel channel) {
 		this.request = request;
 		this.channel = channel;
@@ -35,8 +40,9 @@ public class ModbusTcpServiceRequest<Request extends ModbusRequest>
 	}
 
 	@Override
-	public void sendResponse(ModbusResponse response) {
-		channel.writeAndFlush(response);
+	public void sendResponse(ModbusResponse response,byte addr) {
+		ByteBuf msg = encoder.encode(response, channel.alloc().buffer());
+		channel.writeAndFlush(msg);
 	}
 
 }

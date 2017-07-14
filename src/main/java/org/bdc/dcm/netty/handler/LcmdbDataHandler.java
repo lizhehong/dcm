@@ -47,15 +47,10 @@ class LcRequestHandler implements ServiceRequestHandler{
 
 	@Override
 	public void onReadHoldingRegisters(
-			ServiceRequest<ReadFullReadHoldingRegistersRequest> service) {
-		//ServiceRequestHandler.super.onReadHoldingRegisters(service);
+			ServiceRequest<ReadFullReadHoldingRegistersRequest> service,DataPack dataPack) {
 		ReadFullReadHoldingRegistersRequest  request = service.getRequest();
 		Map<String,Object> quantities = request.getQuantity();
-		
-		
-		ModbusResponse response = new ReadCoilsResponse(coilStatus);
 		//TODO  具体业务
-		service.sendResponse(response );
 	}
 
 }
