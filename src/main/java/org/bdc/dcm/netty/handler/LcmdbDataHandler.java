@@ -18,7 +18,7 @@ import io.netty.channel.ChannelPromise;
 
 public class LcmdbDataHandler extends ModbusTcpHandler {
 
-	private LcLoopCheckStateThread loopThread = new LcLoopCheckStateThread();
+	//private LcLoopCheckStateThread loopThread = new LcLoopCheckStateThread();
 	 
 	public LcmdbDataHandler(NettyBoot nettyBoot) {
 		super(nettyBoot,new LcRequestHandler());
@@ -26,20 +26,20 @@ public class LcmdbDataHandler extends ModbusTcpHandler {
 
 	@Override
 	public void beforeOnChannelRead(ChannelHandlerContext ctx, DataPack dataPack) {
-		if(!loopThread.isRun()){
-			loopThread.setCtx(ctx);
-			loopThread.setMac(dataPack.getMac());
-			new Thread(loopThread).start();
-		}else{//第二笔数据来
-			//TODO --------测试代码
-			
-		}
+//		if(!loopThread.isRun()){
+//			loopThread.setCtx(ctx);
+//			loopThread.setMac(dataPack.getMac());
+//			new Thread(loopThread).start();
+//		}else{//第二笔数据来
+//			//TODO --------测试代码
+//			
+//		}
 	}
 	
 	@Override
 	public void close(ChannelHandlerContext ctx, ChannelPromise promise) throws Exception {
 		super.close(ctx, promise);
-		loopThread.setRun(false);
+		//loopThread.setRun(false);
 	}
 
 }
