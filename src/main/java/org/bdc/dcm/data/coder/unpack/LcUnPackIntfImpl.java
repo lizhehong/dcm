@@ -13,8 +13,7 @@ public class LcUnPackIntfImpl<T> extends PackIntfAdapter<T>{
 	private int headerLen = 2;
 	
 	public LcUnPackIntfImpl() {
-		super();
-		this.macByte = new byte[8];
+		super(new byte[8]);
 	}
 
 	@Override
@@ -38,7 +37,7 @@ public class LcUnPackIntfImpl<T> extends PackIntfAdapter<T>{
 	public ByteBuf payloadToModbusBuf(ByteBuf payload,Optional<NotModbusCallBack<T>> callback) {
 		byte command = payload.readByte();
 		if(command == 0x17){
-			payload.readBytes(macByte);
+			payload.readBytes(getMacByte());
 			payload.readByte();//序号
 			return payload.readBytes(payload.readableBytes());
 		}else{

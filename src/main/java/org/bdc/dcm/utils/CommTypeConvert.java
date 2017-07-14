@@ -48,12 +48,12 @@ public abstract class CommTypeConvert {
 	/**
 	 * 执行方法后的后续处理
 	 */
-	protected  Map<String,Function<Number, ?>> typeToBackConvert= new HashMap<>();
+	protected  Map<Integer,Function<Number, ?>> typeToBackConvert= new HashMap<>();
 	
 	/**
 	 * 用于类型找到对应的bytebuf执行的方法 肯定返回数字类型 Number
 	 */
-	protected  Map<String,Method> typeToMethod = new HashMap<>();
+	protected static Map<String,Method> typeToMethod = new HashMap<>();
 	
 	protected  Function<Number, Double> d10 = null;
 	protected  Function<Number, Double> d100 = null;
@@ -138,4 +138,6 @@ public abstract class CommTypeConvert {
 		}
 	}
 	protected abstract void initTypeTokey() throws Exception;
+
+	public abstract byte[] outModbusBytesByType(String form, Object object, byte modbusAddr);
 }

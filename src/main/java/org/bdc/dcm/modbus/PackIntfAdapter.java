@@ -12,17 +12,17 @@ public abstract class PackIntfAdapter<T> implements CustomPackIntf<T>{
 	/**
 	 * mac 地址
 	 */
-	protected byte[] macByte;
+	private byte[] macByte;
 	/**
 	 * 存放 不存在modbus 结果的数据
 	 */
 	protected Optional<T> callBackResult;
 	
-	@Override
-	public abstract ByteBuf unPackToPayload(ByteBuf msg);
-
-	@Override
-	public abstract ByteBuf payloadToModbusBuf(ByteBuf payload, Optional<NotModbusCallBack<T>> callback);
+	public PackIntfAdapter(byte[] macByte) {
+		super();
+		this.macByte = macByte;
+	}
+	
 
 	@Override
 	public ByteBuf unPackToModbus(ByteBuf msg, NotModbusCallBack<T> callback) {
@@ -39,6 +39,7 @@ public abstract class PackIntfAdapter<T> implements CustomPackIntf<T>{
 		this.macByte = macByte;
 	}
 
+
 	public Optional<T> getCallBackResult() {
 		return callBackResult;
 	}
@@ -47,7 +48,13 @@ public abstract class PackIntfAdapter<T> implements CustomPackIntf<T>{
 		this.callBackResult = callBackResult;
 	}
 
-	
+	@Override
+	public abstract ByteBuf unPackToPayload(ByteBuf msg);
 
+	@Override
+	public abstract ByteBuf payloadToModbusBuf(ByteBuf payload, Optional<NotModbusCallBack<T>> callback);
+
+	
+	
 	
 }

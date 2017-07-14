@@ -11,7 +11,6 @@ import com.util.tools.Public;
 
 public class LcTypeConvert extends CommTypeConvert{
 
-	private final static LcTypeConvert convert = new LcTypeConvert();
 	
 	private static Logger logger = LoggerFactory.getLogger(LcTypeConvert.class); 
 	
@@ -22,27 +21,20 @@ public class LcTypeConvert extends CommTypeConvert{
 	private final static int DATATYPE_SURPLUS_POWER= 14;
 	private final static int DATATYPE_SURPLUS_TIME= 15;
 	
-	
-	protected LcTypeConvert(){
-		super();
-	}
 
-	public static LcTypeConvert builder(){
-		return convert;
-	}
 	
 	@Override
 	protected void initTypeTokey() throws Exception{
 		
-		typeToBackConvert.put("remainTimeLong", d10);
-		typeToBackConvert.put("remainELectricity", d3200);
-		typeToBackConvert.put("totalTime", d10);
-		typeToBackConvert.put("totalActivePower", d3200);
-		typeToBackConvert.put("u", d100);
-		typeToBackConvert.put("i", d1000);
-		typeToBackConvert.put("p", null);
-		typeToBackConvert.put("cos$", d1000);
-		typeToBackConvert.put("JQD_TiaoZa", new Function<Number, Integer>() {
+		typeToBackConvert.put(128, d10);
+		typeToBackConvert.put(130, d3200);
+		typeToBackConvert.put(132, d10);
+		typeToBackConvert.put(134, d3200);
+		typeToBackConvert.put(136, d100);
+		typeToBackConvert.put(137, d1000);
+		typeToBackConvert.put(138, null);
+		typeToBackConvert.put(139, d1000);
+		typeToBackConvert.put(140, new Function<Number, Integer>() {
 
 			@Override
 			public Integer apply(Number i) {
@@ -50,9 +42,9 @@ public class LcTypeConvert extends CommTypeConvert{
 			}
 			
 		});
-		typeToBackConvert.put("temperature", d10);
+		typeToBackConvert.put(141, d10);
 		//只有一路继电器
-		typeToBackConvert.put("JDQ_state", numberToBoolean);
+		typeToBackConvert.put(142, numberToBoolean);
 	}
 	
 	public int convertTypeStr2TypeId(String type) {

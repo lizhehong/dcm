@@ -12,12 +12,11 @@ import org.slf4j.LoggerFactory;
 
 import io.netty.buffer.ByteBuf;
 
-public class TcpLcmdbEncoder extends TcpEncoder {
+public class TcpLqmdbEncoder extends TcpEncoder {
 
-	final static Logger logger = LoggerFactory.getLogger(TcpLcmdbEncoder.class);
+final static Logger logger = LoggerFactory.getLogger(TcpLcmdbEncoder.class);
 	
-	public TcpLcmdbEncoder(NettyBoot nettyBoot, List<DataTab> dataTabs, CommTypeConvert convert) {
+	public TcpLqmdbEncoder(NettyBoot nettyBoot, List<DataTab> dataTabs, CommTypeConvert convert) {
 		super(logger, nettyBoot, new DataTcpEncoder<ByteBuf>(new LcmdbEncoder(dataTabs, convert)));
 	}
-	
 }

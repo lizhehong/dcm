@@ -9,8 +9,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.util.tools.Public;
-
 public class LcmdbFrameDecoder extends ByteToMessageDecoder {
 
 	private Logger logger = LoggerFactory.getLogger(this.getClass());

@@ -6,8 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bdc.dcm.modbus.handler.ModbusTcpHandler;
 import org.bdc.dcm.modbus.requests.ReadFullReadHoldingRegistersRequest;
-import org.bdc.dcm.utils.LcTypeConvert;
+import org.bdc.dcm.utils.CommTypeConvert;
 import org.bdc.dcm.vo.DataTab;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,8 +39,11 @@ public abstract class ModbusRequestDecoder<T> implements ModbusPduDecoder<T> {
 	
 	private List<DataTab> dataTabs = new ArrayList<>();
 	
-	public ModbusRequestDecoder(List<DataTab> dataTabs) {
+	private CommTypeConvert convert;
+	
+	public ModbusRequestDecoder(List<DataTab> dataTabs,CommTypeConvert convert) {
 		this.dataTabs = dataTabs;
+		this.convert = convert;
 	}
 	/**
 	 * pdu解析
@@ -54,9 +58,17 @@ public abstract class ModbusRequestDecoder<T> implements ModbusPduDecoder<T> {
 
         ModbusPdu pdu = decodeResponse(functionCode, pduBytebuf);
         
-        return convert(pdu, modbusAddr, macBytes);
+        return convert(pdu, modbusAddr, macBytes,ModbusTcpHandler.SAVEKEY);
     }
-	protected abstract T convert(ModbusPdu modbusPdu,byte modbusAddr ,byte[] macBytes);
+	/**
+	 * 将 pdu 转为统一的 返回值
+	 * @param modbusPdu
+	 * @param modbusAddr
+	 * @param macBytes
+	 * @oaram dataKey 设置数据的key
+	 * @return
+	 */
+	protected abstract T convert(ModbusPdu modbusPdu,byte modbusAddr ,byte[] macBytes,String dataKey);
 	
     private ModbusPdu decodeResponse(FunctionCode functionCode, ByteBuf buffer) throws DecoderException {
         switch (functionCode) {
@@ -112,7 +124,7 @@ public abstract class ModbusRequestDecoder<T> implements ModbusPduDecoder<T> {
     	DataTab tabFirst = null;
     	int baseAddr = -1;
     	for(DataTab tab:dataTabs){
-    		Object val = LcTypeConvert.builder().convertByteBuf2TypeValue(tab, buffer);
+    		Object val = convert.convertByteBuf2TypeValue(tab, buffer);
     		if(val != null){
     			map.put(tab.getId()+"", val);
     			tabFirst = tab;
