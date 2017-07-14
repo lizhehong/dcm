@@ -57,5 +57,19 @@
 			<artifactId>freemarker</artifactId>
 			<version>${org.freemarker-version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.digitalpetri.modbus/modbus-core -->
+		<dependency>
+			<groupId>com.digitalpetri.modbus</groupId>
+			<artifactId>modbus-core</artifactId>
+			<version>1.1.0</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.3</version>
+		</dependency>
+
+
 	</dependencies>
 </project>
