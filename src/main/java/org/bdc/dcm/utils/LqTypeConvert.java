@@ -9,11 +9,6 @@ public class LqTypeConvert extends CommTypeConvert{
 	
 	private static Logger logger = LoggerFactory.getLogger(LqTypeConvert.class); 
 	
-
-	public static LqTypeConvert builder(){
-		return convert;
-	}
-	
 	@Override
 	protected void initTypeTokey() throws Exception{
 		
