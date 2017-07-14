@@ -19,19 +19,20 @@ public class ModbusTcpHandler extends DataHandler{
 	private final AtomicReference<ServiceRequestHandler> requestHandler =
 	            new AtomicReference<>(new ServiceRequestHandler() {});
 	
-	public ModbusTcpHandler(NettyBoot nettyBoot) {
+	public ModbusTcpHandler(NettyBoot nettyBoot,ServiceRequestHandler req) {
 		super(nettyBoot);
+		this.requestHandler.set(req);
 	}
-	public void setRequestHandler(ServiceRequestHandler requestHandler) {
-        this.requestHandler.set(requestHandler);
-    }
+	
+	public void beforeOnChannelRead(ChannelHandlerContext ctx, DataPack dataPack){};
 	@Override
 	protected void messageReceived(ChannelHandlerContext ctx, DataPack msg) throws Exception {
 		super.messageReceived(ctx, msg);
 		if(msg.getData() !=null && msg.getData().keySet().size() > 0)
 			onChannelRead(ctx,msg);
 	}
-	private void onChannelRead(ChannelHandlerContext ctx, DataPack dataPack) {
+	protected void onChannelRead(ChannelHandlerContext ctx, DataPack dataPack) {
+			beforeOnChannelRead(ctx,dataPack);
 		 	Map<String,Object> data = dataPack.getData();
 		 	ModbusPdu pdu = (ModbusPdu)data.get(SAVEKEY);
 	        ServiceRequestHandler handler = requestHandler.get();

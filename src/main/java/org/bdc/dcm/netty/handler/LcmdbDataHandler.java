@@ -9,6 +9,8 @@ import org.bdc.dcm.netty.NettyBoot;
 import org.bdc.dcm.utils.LcLoopCheckStateThread;
 import org.bdc.dcm.vo.DataPack;
 
+import com.digitalpetri.modbus.responses.ModbusResponse;
+import com.digitalpetri.modbus.responses.ReadCoilsResponse;
 import com.digitalpetri.modbus.responses.ReadHoldingRegistersResponse;
 
 import io.netty.channel.ChannelHandlerContext;
@@ -45,11 +47,15 @@ class LcRequestHandler implements ServiceRequestHandler{
 
 	@Override
 	public void onReadHoldingRegisters(
-			ServiceRequest<ReadFullReadHoldingRegistersRequest, ReadHoldingRegistersResponse> service) {
+			ServiceRequest<ReadFullReadHoldingRegistersRequest> service) {
 		//ServiceRequestHandler.super.onReadHoldingRegisters(service);
 		ReadFullReadHoldingRegistersRequest  request = service.getRequest();
 		Map<String,Object> quantities = request.getQuantity();
+		
+		
+		ModbusResponse response = new ReadCoilsResponse(coilStatus);
 		//TODO  具体业务
+		service.sendResponse(response );
 	}
 
 }

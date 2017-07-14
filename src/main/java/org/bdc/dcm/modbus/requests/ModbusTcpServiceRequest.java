@@ -8,8 +8,8 @@ import com.digitalpetri.modbus.responses.ModbusResponse;
 
 import io.netty.channel.Channel;
 
-public class ModbusTcpServiceRequest<Request extends ModbusRequest, Response extends ModbusResponse>
-		implements ServiceRequestHandler.ServiceRequest<Request, Response> {
+public class ModbusTcpServiceRequest<Request extends ModbusRequest>
+		implements ServiceRequestHandler.ServiceRequest<Request> {
 
 	private final Request request;
 	private final Channel channel;
@@ -20,8 +20,8 @@ public class ModbusTcpServiceRequest<Request extends ModbusRequest, Response ext
 	}
 
 	 @SuppressWarnings("unchecked")
-     public static <Request extends ModbusRequest, Response extends ModbusResponse>
-     ModbusTcpServiceRequest<Request, Response> of(ModbusPdu pdu, Channel channel) {
+     public static <Request extends ModbusRequest>
+     ModbusTcpServiceRequest<Request> of(ModbusPdu pdu, Channel channel) {
 
          return new ModbusTcpServiceRequest<>(
                  (Request) pdu,
@@ -35,7 +35,7 @@ public class ModbusTcpServiceRequest<Request extends ModbusRequest, Response ext
 	}
 
 	@Override
-	public void sendResponse(Response response) {
+	public void sendResponse(ModbusResponse response) {
 		channel.writeAndFlush(response);
 	}
 
