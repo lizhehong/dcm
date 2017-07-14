@@ -19,19 +19,18 @@ public class LcmdbDataHandler extends ModbusTcpHandler {
 	private LcLoopCheckStateThread loopThread = new LcLoopCheckStateThread();
 	 
 	public LcmdbDataHandler(NettyBoot nettyBoot) {
-		super(nettyBoot);
-		setRequestHandler(new LcRequestHandler());
+		super(nettyBoot,new LcRequestHandler());
 	}
 
 	@Override
-	protected void messageReceived(ChannelHandlerContext ctx, DataPack msg) throws Exception {
-		super.messageReceived(ctx, msg);
+	public void beforeOnChannelRead(ChannelHandlerContext ctx, DataPack dataPack) {
 		if(!loopThread.isRun()){
 			loopThread.setCtx(ctx);
-			loopThread.setMac(msg.getMac());
+			loopThread.setMac(dataPack.getMac());
 			new Thread(loopThread).start();
 		}else{//第二笔数据来
 			//TODO --------测试代码
+			
 		}
 	}
 	

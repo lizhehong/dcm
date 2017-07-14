@@ -12,8 +12,7 @@ import com.digitalpetri.modbus.responses.ReadHoldingRegistersResponse;
 public class LqmdbDataHandler extends ModbusTcpHandler  {
 
 	public LqmdbDataHandler(NettyBoot nettyBoot) {
-		super(nettyBoot);
-		setRequestHandler(new LqRequestHandler());
+		super(nettyBoot,new LqRequestHandler());
 	}
 
 }
