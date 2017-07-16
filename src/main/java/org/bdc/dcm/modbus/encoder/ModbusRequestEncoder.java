@@ -140,9 +140,4 @@ public class ModbusRequestEncoder implements ModbusPduEncoder  {
 
 	        return buffer;
 	    }
-
-		@Override
-		public DataPack encode(ModbusPdu modbusPdu) {
-			return null;
-		}
 }
